@@ -5,21 +5,30 @@ import matplotlib.pyplot as plt
 # Load the shared library
 lib = ctypes.CDLL('./libparallelogram.so')
 
-# Define the function prototypes
-lib.main.argtypes = []
-lib.main.restype = None
+# Define argument and return types for the C functions
+lib.calculate_points.argtypes = []
+lib.calculate_points.restype = None
 
-# Call the main function from the C code
-lib.main()
+lib.get_coordinates.argtypes = [ctypes.POINTER(ctypes.c_double), ctypes.POINTER(ctypes.c_double), ctypes.POINTER(ctypes.c_double), ctypes.POINTER(ctypes.c_double)]
+lib.get_coordinates.restype = None
 
-# Coordinates of A(-2, 1), D(1, 2), and C(4, b)
-# Since b is assumed to be 1 in C code
-A = np.array([-2, 1])
-D = np.array([1, 2])
-C = np.array([4, 1])  # Example value for b
+# Call the function to calculate points
+lib.calculate_points()
 
-# Calculate B using the formula B = A + C - D
-B = A + C - D
+# Prepare arrays to hold the coordinates
+a = (ctypes.c_double * 2)()
+b = (ctypes.c_double * 2)()
+c = (ctypes.c_double * 2)()
+d = (ctypes.c_double * 2)()
+
+# Call the function to get coordinates
+lib.get_coordinates(a, b, c, d)
+
+# Convert to numpy arrays
+A = np.array([a[0], a[1]])
+B = np.array([b[0], b[1]])
+C = np.array([c[0], c[1]])
+D = np.array([d[0], d[1]])
 
 # Create a larger figure
 plt.figure(figsize=(10, 12))  # Adjust the width and height as needed
