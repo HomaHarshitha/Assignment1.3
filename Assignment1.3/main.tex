@@ -36,6 +36,8 @@
 \usepackage{hhline}                                           
 \usepackage{ifthen}                                           
 \usepackage{lscape}
+\usepackage{xr}
+\externaldocument{/home/homa/Desktop/matgeo/main}
 \begin{document}
 
 \bibliographystyle{IEEEtran}
@@ -71,6 +73,8 @@ Given vertices of a parallelogram $\vec{A}=\myvec{-2\\1}, \vec{B}=\myvec{a\\0}, 
 \end{table}
 Given, the sides of the parallelogram.\\In a parallelogram $ABCD$, 
 since $AB$ is parallel to $CD$,
+
+From \eqref{eq:two-pgm},
 \begin{align}
     \vec{B}-\vec{A}=\vec{C}-\vec{D}
 \end{align}
@@ -95,6 +99,8 @@ AD=BC=\sqrt{\brak{A-D}^\top\brak{A-D}}\\
 \end{align}
 Substituting values,
 \begin{align}
+AB=\sqrt{\myvec{-3\\1}^\top \myvec{-3\\1}}\\
+AD=\sqrt{\myvec{-3\\-1}^\top \myvec{-3\\-1}}\\
 AB=CD=\sqrt{10}\label{1-1.9-21-7}\\
 AD=BC=\sqrt{10}\label{1-1.9-21-8}
 \end{align}
