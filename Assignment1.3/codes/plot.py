@@ -5,24 +5,18 @@ import matplotlib.pyplot as plt
 # Load the shared library
 lib = ctypes.CDLL('./libparallelogram.so')
 
-# Define argument and return types for the C functions
-lib.calculate_points.argtypes = []
+# Define the argument types and return types for calculate_points
+lib.calculate_points.argtypes = [ctypes.POINTER(ctypes.c_double), ctypes.POINTER(ctypes.c_double), ctypes.POINTER(ctypes.c_double), ctypes.POINTER(ctypes.c_double)]
 lib.calculate_points.restype = None
 
-lib.get_coordinates.argtypes = [ctypes.POINTER(ctypes.c_double), ctypes.POINTER(ctypes.c_double), ctypes.POINTER(ctypes.c_double), ctypes.POINTER(ctypes.c_double)]
-lib.get_coordinates.restype = None
-
-# Call the function to calculate points
-lib.calculate_points()
-
-# Prepare arrays to hold the coordinates
+# Prepare arrays to hold the coordinates (A, B, C, D)
 a = (ctypes.c_double * 2)()
 b = (ctypes.c_double * 2)()
 c = (ctypes.c_double * 2)()
 d = (ctypes.c_double * 2)()
 
-# Call the function to get coordinates
-lib.get_coordinates(a, b, c, d)
+# Call the function to calculate points
+lib.calculate_points(a, b, c, d)
 
 # Convert to numpy arrays
 A = np.array([a[0], a[1]])
